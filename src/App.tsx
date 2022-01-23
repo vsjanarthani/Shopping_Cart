@@ -42,7 +42,11 @@ const App = () => {
   console.log(data);
 
   // return
-  if(isLoading) return <LinearProgress />;
+  if(isLoading) return (
+  <div> 
+    <h3>Loading Please Wait..</h3>
+  <LinearProgress />
+  </div> );
   if(error) return <div>Something Went Wrong. Please Try Again Later..</div>
     return (
       <AppWrapper>
