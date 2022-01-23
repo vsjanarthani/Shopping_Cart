@@ -29,6 +29,14 @@ div {
     height: 100%;
 }
 
+h1 {
+    text-align:center;
+    width: 100%;
+}
+h3 {
+    text-align: center;
+}
+
 p {
     color: grey;
 }

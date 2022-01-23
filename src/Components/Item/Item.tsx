@@ -22,7 +22,7 @@ const Item: React.FC<ItemProps> = ({item, addCartItem}) => (
             <p>{item.description}</p>
             <h3>${item.price}</h3>
         </div>
-        <Button onClick={()=> addCartItem (item)}> Add to Cart</Button>
+        <Button onClick={() => addCartItem (item)}> Add to Cart</Button>
     </ItemWrapper>
 );
 
