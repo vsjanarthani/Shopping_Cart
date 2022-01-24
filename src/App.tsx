@@ -49,13 +49,31 @@ const App = () => {
   const addCartItem = (selectedItem: CartItemType) => {
     console.log(selectedItem);
     setCartItems(prev => {
+      // check if item already added to the cart
+      const isItemInCart = prev.find(item => item.id === selectedItem.id);
+      if(isItemInCart) {
+        return prev.map(item => {
+          item.id === selectedItem.id ? {...item, amount: item.amount + 1}
+          : item
+        });
+      };
+    // first time the item is added 
       return [...prev, {...selectedItem, amount: 1}]
     })
   }
 
   // Function to remove items from cart
   const removeCartItem = (id: number) => {
-    console.log('Remove item');
+    setCartItems(prev => 
+      prev.reduce((ack, item) => {
+        if (item.id === id) {
+          if (item.amount === 1) return ack;
+          return [...ack, { ...item, amount: item.amount - 1 }];
+        } else {
+          return [...ack, item];
+        }
+      }, [] as CartItemType[])
+    );
   };
 
   // return

@@ -1,14 +1,13 @@
 import {Button} from '@material-ui/core/';
 // Types
 import { CartItemType } from '../../App';
-import Item from '../Item/Item';
 // Styles
 import { CartItemWrapper } from './CartItem.styles';
 
 // Type Props
 type Props = {
     item: CartItemType;
-    addCartItem: (selectedItem: CartItemType) => void;
+    addCartItem: (selectedItem: CartItemType) => void | CartItemType[];
     removeCartItem: (id: number) => void;
 };
 
