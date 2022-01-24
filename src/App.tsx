@@ -5,6 +5,7 @@ import { useQuery} from 'react-query';
 import { LinearProgress, Drawer, Grid, Badge } from '@material-ui/core';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Item from './Components/Item/Item';
+import Cart from './Components/Cart/Cart';
 
 // Styles
 import {AppWrapper, StyledButton} from './App.styles';
@@ -17,7 +18,7 @@ export type CartItemType = {
   image: string;
   price: number;
   title: string;
-  amount: string;
+  amount: number;
 }
 
 // Function to fetch from fakestore API
@@ -38,13 +39,24 @@ const App = () => {
   // console.log(data);
 
   // Function to get Cart total
-const getCartTotal = (items: CartItemType[]) => null;
+  const getCartTotal = (items: CartItemType[]) => {
+    console.log(items);
+    if(items.length === 0) return "0";
+    return items.length;
+  }
   
   // Function to add items to cart
-  const addCartItem = (selectedItem: CartItemType) => null;
+  const addCartItem = (selectedItem: CartItemType) => {
+    console.log(selectedItem);
+    setCartItems(prev => {
+      return [...prev, {...selectedItem, amount: 1}]
+    })
+  }
 
   // Function to remove items from cart
-  const removeCartItem = (selectedItem: CartItemType[]) => null;
+  const removeCartItem = (id: number) => {
+    console.log('Remove item');
+  };
 
   // return
   if(isLoading) return (
@@ -57,12 +69,13 @@ const getCartTotal = (items: CartItemType[]) => null;
     return (
       <AppWrapper>
         <Drawer anchor='right' open={cartOpen} onClose={()=> setCartOpen(false)}>
-          Cart
+          <Cart cartItems={cartItems} addCartItem={addCartItem} removeCartItem={removeCartItem}/>
         </Drawer>
-        <StyledButton onClick={()=> setCartOpen(true)} />
+        <StyledButton onClick={()=> setCartOpen(true)}>
         <Badge badgeContent={getCartTotal(cartItems)} color='error'> 
         <AddShoppingCartIcon />
         </Badge>
+        </StyledButton>
         <Grid container spacing={3}>
          {data?.map(item => (
            <Grid item key={item.id} xs={12} sm={4}> 
