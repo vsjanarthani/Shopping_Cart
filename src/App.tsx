@@ -40,14 +40,14 @@ const App = () => {
 
   // Function to get Cart total
   const getCartTotal = (items: CartItemType[]) => {
-    console.log(items);
+    // console.log(items);
     if(items.length === 0) return "0";
     return items.length;
   }
   
   // Function to add items to cart
   const addCartItem = (selectedItem: CartItemType) => {
-    console.log(selectedItem);
+    // console.log(selectedItem);
     setCartItems(prev => {
       // 1. Is the item already added in the cart?
       const isItemInCart = prev.find(item => item.id === selectedItem.id);

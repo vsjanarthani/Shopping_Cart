@@ -12,8 +12,9 @@ type Props = {
 };
 
 const Cart: React.FC<Props> = ({cartItems, addCartItem, removeCartItem}) => {
-    
-
+    // console.log(cartItems);
+    let sum = 0;
+    cartItems.forEach(item => { sum = sum + (item.amount * item.price)});
     return (
         <CartWrapper>
             <h2>Cart Items</h2>
@@ -26,6 +27,7 @@ const Cart: React.FC<Props> = ({cartItems, addCartItem, removeCartItem}) => {
                     removeCartItem={removeCartItem}
                     />
             ))}
+            <h3>Cart Total: ${sum}</h3>
         </CartWrapper>
     );
 };
