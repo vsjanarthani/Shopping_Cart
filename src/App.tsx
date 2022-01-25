@@ -29,7 +29,7 @@ await(await fetch('https://fakestoreapi.com/products')).json();
 const App = () => {
   // useState
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([] as CartItemType[]);
+  const [cartItems, setCartItems] = useState<CartItemType[]>([]);
 
   // useQuery
   const {data, isLoading, error} = useQuery<CartItemType[]>(
@@ -49,17 +49,19 @@ const App = () => {
   const addCartItem = (selectedItem: CartItemType) => {
     console.log(selectedItem);
     setCartItems(prev => {
-      // check if item already added to the cart
+      // 1. Is the item already added in the cart?
       const isItemInCart = prev.find(item => item.id === selectedItem.id);
-      if(isItemInCart) {
-        return prev.map(item => {
-          item.id === selectedItem.id ? {...item, amount: item.amount + 1}
-          : item
-        });
-      };
-    // first time the item is added 
-      return [...prev, {...selectedItem, amount: 1}]
-    })
+
+      if (isItemInCart) {
+        return prev.map(item =>
+          item.id === selectedItem.id
+            ? { ...item, amount: item.amount + 1 }
+            : item
+        );
+      }
+      // First time the item is added
+      return [...prev, { ...selectedItem, amount: 1 }];
+    });
   }
 
   // Function to remove items from cart

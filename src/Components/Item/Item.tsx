@@ -10,7 +10,7 @@ import { ItemWrapper } from './Item.styles';
 // Type assignment
 type ItemProps = {
     item: CartItemType;
-    addCartItem: (selectedItem: CartItemType) => void | CartItemType[];
+    addCartItem: (selectedItem: CartItemType) => void;
 }
 
 // Item

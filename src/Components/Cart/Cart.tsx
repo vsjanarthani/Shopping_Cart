@@ -7,7 +7,7 @@ import { CartItemType } from '../../App';
 // Type Props
 type Props = {
     cartItems: CartItemType[];
-    addCartItem: (selectedItem: CartItemType) => void | CartItemType[];
+    addCartItem: (selectedItem: CartItemType) => void;
     removeCartItem: (id: number) => void;
 };
 
