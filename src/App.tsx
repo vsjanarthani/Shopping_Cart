@@ -2,13 +2,15 @@ import { useState} from 'react';
 import { useQuery} from 'react-query';
 
 // Componenets
-import { LinearProgress, Drawer, Grid, Badge } from '@material-ui/core';
+import { LinearProgress, Drawer, Grid, Badge, AppBar, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Item from './Components/Item/Item';
 import Cart from './Components/Cart/Cart';
 
 // Styles
 import {AppWrapper, StyledButton} from './App.styles';
+import { findByLabelText } from '@testing-library/dom';
 
 // Types
 export type CartItemType = {
@@ -21,12 +23,36 @@ export type CartItemType = {
   amount: number;
 }
 
+// Styles from materialUI
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: '100%',
+      margin: '5px 0 5px 0',
+      padding: '5px',
+      background: 'papayawhip',
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    title: {
+      flexGrow: 1,
+      textAlign: 'center',
+      background: 'papayawhip',
+      color: 'black',
+      fontFamily: 'Arial, Helvetica, sans-serif'
+    },
+  }),
+);
+
 // Function to fetch from fakestore API
 const getProductData = async (): Promise<CartItemType[]> => 
 await(await fetch('https://fakestoreapi.com/products')).json();
 
 // App
 const App = () => {
+  // MaterialUI themes
+  const classes = useStyles();
   // useState
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
@@ -88,15 +114,21 @@ const App = () => {
   if(error) return <div>Something Went Wrong. Please Try Again Later..</div>
     return (
       <AppWrapper>
+        <AppBar className={classes.root} position="static">
+        <Typography variant="h6" className={classes.title}>
+            My React Shopping Cart
+          </Typography>
         <Drawer anchor='right' open={cartOpen} onClose={()=> setCartOpen(false)}>
           <Cart cartItems={cartItems} addCartItem={addCartItem} removeCartItem={removeCartItem}/>
         </Drawer>
         <StyledButton onClick={()=> setCartOpen(true)}>
         <Badge badgeContent={getCartTotal(cartItems)} color='error'> 
-        <AddShoppingCartIcon />
+        <AddShoppingCartIcon/>
         </Badge>
         </StyledButton>
-        <Grid container spacing={3}>
+        </AppBar>
+
+        <Grid className='itemgrid' container spacing={3}>
          {data?.map(item => (
            <Grid item key={item.id} xs={12} sm={4}> 
            <Item item={item} addCartItem={addCartItem} />

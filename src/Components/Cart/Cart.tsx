@@ -27,7 +27,7 @@ const Cart: React.FC<Props> = ({cartItems, addCartItem, removeCartItem}) => {
                     removeCartItem={removeCartItem}
                     />
             ))}
-            <h3>Cart Total: ${sum}</h3>
+            <h3>Cart Total: ${sum.toFixed(2)}</h3>
         </CartWrapper>
     );
 };

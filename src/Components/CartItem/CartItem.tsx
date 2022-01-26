@@ -1,4 +1,6 @@
 import {Button} from '@material-ui/core/';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 // Types
 import { CartItemType } from '../../App';
 // Styles
@@ -16,7 +18,7 @@ const CartItem: React.FC<Props> = ({item, addCartItem, removeCartItem}) => (
         <div>
             <h3>{item.title}</h3>
             <div className='cartinfo'>
-                <p>Price: ${item.price}</p>
+                <p>Price: ${item.price.toFixed(2)}</p>
                 <p>Total: ${(item.price * item.amount).toFixed(2)}</p>
             </div>
             <div className='cartbutton'>
@@ -26,7 +28,7 @@ const CartItem: React.FC<Props> = ({item, addCartItem, removeCartItem}) => (
                 variant='contained'
                 onClick={()=> removeCartItem(item.id)}
                 >
-                    -
+                    <RemoveIcon />
                 </Button>
                 <p>{item.amount}</p>
                 <Button 
@@ -35,7 +37,7 @@ const CartItem: React.FC<Props> = ({item, addCartItem, removeCartItem}) => (
                 variant='contained'
                 onClick={()=> addCartItem(item)}
                 >
-                    +
+                    <AddIcon />
                 </Button>
             </div>
         </div>
