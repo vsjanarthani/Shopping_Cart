@@ -31,10 +31,11 @@ This application is covered under **MIT** license.
 No contributions at the moment.
 
 ### Screenshot
-![webpage](./assets/images/screenshot.png)
+![webpage](assets/images/Screenshot.png)
 
 ### Deployed
 The application is deployed on  [https://shopping-cart-ts-jana.netlify.app/](https://shopping-cart-ts-jana.netlify.app/)
+<!-- Netlify deploy setting - change the build command to "CI=false npm run build"-->
 
 ### Questions
 If you have any questions, please reach out to the<br>
